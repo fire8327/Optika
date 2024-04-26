@@ -2,59 +2,59 @@
     <div class="flex max-lg:flex-col gap-6">
         <div class="flex flex-col border-2 border-[#0C669C] p-4 rounded-lg lg:w-1/4 gap-6">
             <div class="flex flex-col gap-2">
-                <p class="text-2xl">Цена</p>
+                <p class="text-2xl font-Comfortaa font-normal">Цена</p>
                 <div class="flex items-center gap-1">
                     <input class="w-1/2 rounded-l-md border border-[#3BBAC2] px-4 py-2" placeholder="От" type="text">
                     <input class="w-1/2 rounded-r-md border border-[#3BBAC2] px-4 py-2" placeholder="До" type="text">
                 </div>
             </div>
             <div class="flex flex-col gap-2">
-                <p class="text-2xl">Возраст</p>
-                <select class="rounded-md border border-[#3BBAC2] px-4 py-2 font-light" name="">
+                <p class="text-2xl font-Comfortaa font-normal">Возраст</p>
+                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="">
                     <option value="1">Для взрослых</option>
                     <option value="2">Для детей</option>
                 </select>
             </div>
             <div class="flex flex-col gap-2">
-                <p class="text-2xl">Тип</p>
-                <select class="rounded-md border border-[#3BBAC2] px-4 py-2 font-light" name="">
+                <p class="text-2xl font-Comfortaa font-normal">Тип</p>
+                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="">
                     <option value="1">Солнцезащитные</option>
                     <option value="2">Оправы</option>
                 </select>
             </div>
             <div class="flex flex-col gap-2">
-                <p class="text-2xl">Бренд</p>
-                <label class="flex items-center gap-2 text-lg font-thin">
+                <p class="text-2xl font-Comfortaa font-normal">Бренд</p>
+                <label class="flex items-center gap-2 text-lg">
                     <input type="checkbox" name="brand" class="w-5 h-5">
                     Бренд 1
                 </label>
-                <label class="flex items-center gap-2 text-lg font-thin">
+                <label class="flex items-center gap-2 text-lg">
                     <input type="checkbox" name="brand" class="w-5 h-5">
                     Бренд 2
                 </label>
-                <label class="flex items-center gap-2 text-lg font-thin">
+                <label class="flex items-center gap-2 text-lg">
                     <input type="checkbox" name="brand" class="w-5 h-5">
                     Бренд 3
                 </label>
             </div>
             <div class="flex flex-col gap-2">
-                <p class="text-2xl">Цвет</p>
-                <label class="flex items-center gap-2 text-lg font-thin">
+                <p class="text-2xl font-Comfortaa font-normal">Цвет</p>
+                <label class="flex items-center gap-2 text-lg">
                     <input type="checkbox" name="color" class="w-5 h-5">
                     Цвет 1
                 </label>
-                <label class="flex items-center gap-2 text-lg font-thin">
+                <label class="flex items-center gap-2 text-lg">
                     <input type="checkbox" name="color" class="w-5 h-5">
                     Цвет 2
                 </label>
-                <label class="flex items-center gap-2 text-lg font-thin">
+                <label class="flex items-center gap-2 text-lg">
                     <input type="checkbox" name="color" class="w-5 h-5">
                     Цвет 3
                 </label>
             </div>
             <div class="flex flex-col gap-2">
                 <button class="px-4 py-2 rounded-md text-white w-full text-center bg-[#3BBAC2]">Применить</button>
-                <button class="px-4 py-2 rounded-md text-white w-full text-center bg-[#3BBAC2]">Сбросить</button>
+                <button class="px-4 py-2 rounded-md text-[#3BBAC2] w-full text-center border border-[#3BBAC2]">Сбросить</button>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 h-fit lg:grid-cols-3 lg:w-3/4 gap-4">
