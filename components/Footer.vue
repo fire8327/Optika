@@ -1,5 +1,5 @@
 <template>
-    <footer class="flex flex-col w-full mt-16 bg-gradient-to-tr from-[#0C669C]/90 to-[#3BBAC2]/90  text-white">
+    <footer class="flex flex-col w-full mt-16 bg-gradient-to-tr from-[#0C669C]/90 to-[#3BBAC2]/90 text-white text-lg">
         <div class="grid-container py-6">
             <div class="flex items-center max-xl:flex-col xl:gap-32 md:gap-12 gap-8">
                 <div class="flex items-center gap-6">

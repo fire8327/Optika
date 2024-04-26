@@ -1,5 +1,5 @@
 <template>
-    <header class="w-full bg-white relative grid-container py-2 border-b-[0.5px] border-[#3BBAC2]">
+    <header class="w-full bg-white relative grid-container py-2 border-b-2 border-[#3BBAC2]">
         <div class="flex items-center gap-10 max-lg:justify-between">
             <NuxtLink to="/">
                 <img class="w-20" src="/img/header/logo.png" alt=""> 
@@ -21,7 +21,7 @@
                 </div>
                 <div class="flex gap-8 items-center max-md:gap-4 max-lg:flex-wrap max-lg:justify-center">
                     <form class="relative max-lg:w-full" action="">
-                        <input class="rounded-full border-2 border-[#3BBAC2] pl-4 py-1 pr-10 w-full focus:outline-none focus:ring-0 focus:appearance-none" type="text">
+                        <input class="rounded-full border border-[#3BBAC2] pl-4 py-1 pr-10 w-full focus:outline-none focus:ring-0 focus:appearance-none" type="text">
                         <button class="absolute top-1/2 -translate-y-1/2 right-3">
                             <Icon class="text-2xl text-[#3BBAC2]" name="gravity-ui:magnifier"/>
                         </button>
