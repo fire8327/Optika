@@ -1,7 +1,8 @@
 export default {
     theme: {
         fontFamily: {
-            'Montserrat': 'Montserrat'
+            'PT-Sans': 'PT Sans',
+            'Comfortaa': 'Comfortaa'
         }
     },
     content:[

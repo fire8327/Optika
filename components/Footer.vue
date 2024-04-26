@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="grid-container w-full bg-black/25 py-2">
-            <p class="text-center mx-auto">© 2024 Samareva™. All Rights Reserved.</p>
+            <p class="text-center mx-auto">© 2024 <span class="font-Comfortaa">Samareva</span>™. All Rights Reserved.</p>
         </div>
     </footer>
 </template>
