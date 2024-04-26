@@ -1,0 +1,66 @@
+<template>
+    <header class="w-full bg-white relative grid-container py-2 border-b-[0.5px] border-[#3BBAC2]">
+        <div class="flex items-center gap-10 max-lg:justify-between">
+            <NuxtLink to="/">
+                <img class="w-20" src="/img/header/logo.png" alt=""> 
+            </NuxtLink>
+            <div class="flex items-center lg:justify-between max-lg:px-4 grow max-lg:flex-col max-lg:absolute max-lg:gap-6 max-lg:left-0 max-lg:bg-white max-lg:transition-all max-lg:duration-500 max-lg:z-30 max-lg:py-6 max-lg:justify-center max-lg:w-full" :class="isMenuShow ? 'max-lg:top-[calc(100%+1px)]' : 'max-lg:top-0 max-lg:-translate-y-full'">
+                <div class="flex items-center gap-16 max-lg:flex-col max-xl:gap-8">
+                    <NuxtLink to="/catalog">
+                        Каталог
+                    </NuxtLink>
+                    <NuxtLink to="/stock">
+                        Акции
+                    </NuxtLink>
+                    <NuxtLink to="/about">
+                        О нас
+                    </NuxtLink>
+                    <NuxtLink to="/delivery">
+                        Доставка
+                    </NuxtLink>
+                </div>
+                <div class="flex gap-8 items-center max-md:gap-4 max-lg:flex-wrap max-lg:justify-center">
+                    <form class="relative max-lg:w-full" action="">
+                        <input class="rounded-full border-2 border-[#3BBAC2] pl-4 py-1 pr-10 w-full focus:outline-none focus:ring-0 focus:appearance-none" type="text">
+                        <button class="absolute top-1/2 -translate-y-1/2 right-3">
+                            <Icon class="text-2xl text-[#3BBAC2]" name="gravity-ui:magnifier"/>
+                        </button>
+                    </form>
+                    <NuxtLink to="/cart" v-if="authenticated">
+                        <Icon class="text-2xl text-[#3BBAC2]" name="material-symbols:shopping-cart-outline"/>
+                    </NuxtLink>
+                    <NuxtLink to="/" v-if="authenticated">
+                        <Icon class="text-2xl text-[#3BBAC2]" name="material-symbols:account-circle-full"/>
+                    </NuxtLink>
+                    <button @click="logout" v-if="authenticated" class="bg-gradient-to-r from-[#0C669C] to-[#3BBAC2] text-white py-2 px-7 rounded-md hover:opacity-80 transition-all duration-300">
+                        Выход
+                    </button>
+                    <NuxtLink to="/auth" v-else class="bg-gradient-to-r from-[#0C669C] to-[#3BBAC2] text-white py-2 px-7 rounded-md hover:opacity-80 transition-all duration-300">
+                        Вход
+                    </NuxtLink>
+                </div>
+            </div>
+            <button class="flex flex-col justify-between w-[26px] transition-[height] z-40 ease-linear duration-100 lg:hidden" :class="isMenuShow ? 'h-5' : 'h-3.5'" @click="isMenuShow = !isMenuShow">
+                <span :class="{'rotate-45' : isMenuShow}" class="w-full h-0.5 bg-[#3BBAC2] rounded-[1px] origin-[0] transition-transform ease-linear duration-500"></span>
+                <span :class="{'opacity-0' : isMenuShow}" class="w-full h-0.5 bg-[#3BBAC2] rounded-[1px] transition-opacity ease-linear duration-500"></span>
+                <span :class="{'-rotate-45' : isMenuShow}" class="w-full h-0.5 bg-[#3BBAC2] rounded-[1px] origin-[0] transition-transform ease-linear duration-500"></span>
+            </button>
+        </div>
+        <div @click="isMenuShow = false" class="w-full absolute h-screen bg-black/70 left-0 col-span-full z-20 top-[calc(100%+1px)] lg:hidden" :class="{'hidden' : !isMenuShow}"></div>
+
+        
+    </header>
+</template>
+
+<script setup>
+import { useUserStore } from '~/stores/user';
+
+    const isMenuShow = ref(false)
+    const {authenticated, role} = storeToRefs(useUserStore())
+    const router = useRouter()
+    const logout = () => {
+        authenticated.value = false
+        role.value = null
+        router.push('/')
+    }
+</script>

@@ -1,0 +1,77 @@
+<template>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div class="flex bg-white max-lg:flex-col p-6 rounded-md gap-10 col-span-1 lg:col-span-2">
+            <div class="relative lg:w-3/5">
+                <Swiper :loop="true" :space-between="20" :modules="[SwiperPagination, SwiperAutoplay, SwiperNavigation]" :navigation="{prevEl:'.productsPrev', nextEl:'.productsNext'}" :pagination="{ clickable: true }" :autoplay="{delay:3500}" class="w-full z-[1] rounded-md overflow-hidden">
+                    <SwiperSlide class="w-full">
+                        <NuxtLink class="w-full">
+                            <img class="object-cover aspect-video w-full" src="/img/hero/3.jpg" alt="">
+                        </NuxtLink>
+                    </SwiperSlide>
+                    <SwiperSlide class="w-full">
+                        <NuxtLink class="w-full">
+                            <img class="object-cover aspect-video w-full" src="/img/hero/4.jpg" alt="">
+                        </NuxtLink>
+                    </SwiperSlide>
+                    <SwiperSlide class="w-full">
+                        <NuxtLink class="w-full">
+                            <img class="object-cover aspect-video w-full" src="/img/hero/5.jpg" alt="">
+                        </NuxtLink>
+                    </SwiperSlide>
+                </Swiper>
+                <button class="absolute top-1/2 -translate-y-1/2 -left-8 productsPrev">
+                    <Icon class="text-4xl text-[#218CAD]" name="material-symbols:chevron-left"/>
+                </button>
+                <button class="absolute top-1/2 -translate-y-1/2 -right-8 productsNext">
+                    <Icon class="text-4xl text-[#218CAD]" name="material-symbols:chevron-right"/>
+                </button>
+            </div>
+            <div class="lg:w-2/5 flex flex-col gap-6">
+                <p class="opacity-70 text-sm">ID:21212121</p>
+                <div class="flex flex-col gap-2">
+                    <p class="text-3xl font-semibold">Бренд</p>
+                    <p class="text-xl opacity-80">Название</p>
+                </div>
+                <div class="h-px rounded-full mx-auto w-[90%] bg-[#0C669C]/80"></div>
+                <p class="text-3xl text-[#3BBAC2]">500 000 000₽</p>
+                <div class="h-px rounded-full mx-auto w-[90%] bg-[#0C669C]/80"></div>
+                <button class="bg-[#0C669C] rounded-full text-white px-4 py-2 w-1/2 mx-auto transition-all hover:animate-pulse">Купить</button>
+                <p class="text-lg">Товар: <span class="text-emerald-700">в наличии</span></p>
+            </div>
+        </div>
+        <div class="flex flex-col bg-white rounded-md p-4 gap-8 col-span-1">
+            <p class="text-2xl">Характеристики</p>
+            <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2 text-base" v-for="d in 5">
+                    <div class="flex items-center justify-between gap-2">
+                        <p class="opacity-60">Материал оправы:</p>
+                        <p>Пластик-металл</p>
+                    </div>
+                    <div class="h-px w-full border-b border-black/70 border-dashed"></div>    
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col bg-white rounded-md p-4 gap-4 col-span-1">
+            <p class="text-2xl">Описание</p>
+            <p class="font-normal">
+                Мы рады предложить вам широкий ассортимент высококачественных очков по выгодным ценам. Наш магазин призван обеспечить ваш комфорт и удовлетворить все ваши потребности в сфере офтальмологии.<br><br>
+
+                <span class="font-semibold">Преимущества нашего магазина:</span><br>
+
+                <br>• <span class="font-semibold">Обширный выбор:</span> Вы найдете оправы и контактные линзы на любой вкус, стиль и бюджет. От классических до современных, от повседневных до дизайнерских — у нас есть все, что вы ищете.
+                <br>• <span class="font-semibold">Высокое качество:</span> Вся наша продукция производится из высококачественных материалов и соответствует самым строгим стандартам. Вы можете быть уверены в долговечности и надежности наших очков.
+                <br>• <span class="font-semibold">Доступные цены:</span> Мы понимаем, что очки — это необходимость, а не роскошь. Поэтому мы предлагаем нашу продукцию по самым доступным ценам, чтобы каждый мог позаботиться о своем зрении.
+                <br>• <span class="font-semibold">Профессиональная помощь:</span> Наша команда опытных специалистов всегда готова ответить на ваши вопросы, помочь с выбором и предоставить профессиональные рекомендации.
+                <br>• <span class="font-semibold">Удобство:</span> Наши покупки можно совершить в любое время и в любом месте. Удобный интерфейс сайта позволит вам легко найти нужный товар и оформить заказ.
+            </p>
+        </div>
+    </div>
+
+</template>
+
+<script setup>
+useServerSeoMeta({
+    title: 'Товар',
+    lang: 'ru'
+})
+</script>
