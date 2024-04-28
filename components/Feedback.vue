@@ -2,7 +2,7 @@
     <div class="relative bg-[url(/img/contact/bg.png)] p-4 rounded-lg overflow-hidden">
         <div class="absolute w-full h-full top-0 left-0 bg-black/70 col-span-full"></div>
         <div class="flex flex-col gap-6 relative z-[1]">
-            <div class="flex items-center gap-2 text-xl text-white md:text-2xl xl:text-3xl px-4 md:px-6 xl:px-10 pt-10 font-Comfortaa">
+            <div class="flex items-center gap-2 text-xl text-white md:text-2xl xl:text-3xl px-4 md:px-6 xl:px-10 pt-10 font-Comfortaa font-normal">
                 <span class="w-8 h-0.5 bg-white rounded-full"></span>
                 <p>Связаться с нами</p>
                 <span class="w-8 h-0.5 bg-white rounded-full"></span>
@@ -12,15 +12,15 @@
                     <div class="bg-white p-4 rounded-md grow">
                         <Swiper :loop="true" :space-between="20" :modules="[SwiperAutoplay, SwiperPagination]" :pagination="{ clickable: true }" :autoplay="{delay:5000}" class="w-full h-full">
                             <SwiperSlide class="!flex flex-col gap-8 w-full mb-10">
-                                <p class="text-2xl font-Comfortaa">Близорукость</p>
+                                <p class="text-xl font-Comfortaa">Близорукость</p>
                                 <p class="opacity-70">Близорукость — распространенное заболевание глаз, при котором человек видит хорошо близко, но плохо вдали. Причина - фокусировка света в области перед сетчаткой. Лечится очками, контактными линзами или хирургическими методами. Раннее выявление и правильная коррекция важны для сохранения зрения и комфортной жизни.</p> 
                             </SwiperSlide>
                             <SwiperSlide class="!flex flex-col gap-8 w-full mb-10">
-                                <p class="text-2xl font-Comfortaa">Дальнозоркость</p>
+                                <p class="text-xl font-Comfortaa">Дальнозоркость</p>
                                 <p class="opacity-70">Дальнозоркость  - состояние, когда человек видит хорошо вдали, но плохо близко. Происходит из-за того, что фокус света падает позади сетчатки. Нередко возникает у детей и может быть унаследовано. Лечится очками, линзами или хирургическим вмешательством. Важна регулярная проверка зрения у офтальмолога для своевременной коррекции и поддержания зрительного комфорта.</p> 
                             </SwiperSlide>
                             <SwiperSlide class="!flex flex-col gap-8 w-full mb-10">
-                                <p class="text-2xl font-Comfortaa">Астигматизм</p>
+                                <p class="text-xl font-Comfortaa">Астигматизм</p>
                                 <p class="opacity-70">Астигматизм - это нарушение зрения, когда корневая поверхность глаза не идеально округлая, что вызывает искажение изображения. Человек видит размыто как на близком, так и на дальнем расстоянии. Лечится очками, линзами или хирургически. Важно регулярно проверять зрение у офтальмолога для подбора оптимального способа коррекции и поддержания зрительного комфорта.</p> 
                             </SwiperSlide>
                         </Swiper>

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center gap-2 text-xl md:text-2xl xl:text-3xl font-Comfortaa">
+    <div class="flex items-center gap-2 text-xl md:text-2xl xl:text-3xl font-Comfortaa font-normal">
         <span class="w-8 h-0.5 bg-black rounded-full"></span>
         <p>Отзывы</p>
         <span class="w-8 h-0.5 bg-black rounded-full"></span>
