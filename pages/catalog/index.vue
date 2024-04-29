@@ -10,46 +10,28 @@
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Возраст</p>
-                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="">
-                    <option value="1">Для взрослых</option>
-                    <option value="2">Для детей</option>
+                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="age">
+                    <option :value="age" v-for="age in selectAge">{{ age }}</option>
                 </select>
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Тип</p>
-                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="">
-                    <option value="1">Солнцезащитные</option>
-                    <option value="2">Оправы</option>
+                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="type">
+                    <option :value="type" v-for="type in selectType">{{ type }}</option>
                 </select>
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Бренд</p>
-                <label class="flex items-center gap-2 text-lg">
+                <label class="flex items-center gap-2 text-lg" v-for="brand in inputBrand">
                     <input type="checkbox" name="brand" class="w-5 h-5">
-                    Бренд 1
-                </label>
-                <label class="flex items-center gap-2 text-lg">
-                    <input type="checkbox" name="brand" class="w-5 h-5">
-                    Бренд 2
-                </label>
-                <label class="flex items-center gap-2 text-lg">
-                    <input type="checkbox" name="brand" class="w-5 h-5">
-                    Бренд 3
+                    {{ brand }}
                 </label>
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Цвет</p>
-                <label class="flex items-center gap-2 text-lg">
+                <label class="flex items-center gap-2 text-lg" v-for="color in inputColor">
                     <input type="checkbox" name="color" class="w-5 h-5">
-                    Цвет 1
-                </label>
-                <label class="flex items-center gap-2 text-lg">
-                    <input type="checkbox" name="color" class="w-5 h-5">
-                    Цвет 2
-                </label>
-                <label class="flex items-center gap-2 text-lg">
-                    <input type="checkbox" name="color" class="w-5 h-5">
-                    Цвет 3
+                    {{ color }}
                 </label>
             </div>
             <div class="flex flex-col gap-2">
@@ -73,10 +55,34 @@
 
     /* подключение к БД */
     const supabase = useSupabaseClient()
-    const { data: products, error } = await supabase
+    const { data, error } = await supabase
     .from('products')
     .select('*')
-            
+    .order('title', { ascending: true })   
+    
+    const products = ref(data) 
+
+
+    /* управление select'ами и input'ами */
+    const selectAge = ref(['Все'])
+    const selectType = ref(['Все'])
+    const inputBrand = ref([])
+    const inputColor = ref([])
+    products.value.forEach(el => {
+        if(selectAge.value.indexOf(el.age) === -1) {
+            selectAge.value.push(el.age)
+        }
+        if(selectType.value.indexOf(el.type) === -1) {
+            selectType.value.push(el.type)
+        }
+        if(inputBrand.value.indexOf(el.brand) === -1) {
+            inputBrand.value.push(el.brand)
+        }
+        if(inputColor.value.indexOf(el.color) === -1) {
+            inputColor.value.push(el.color)
+        }
+    })
+       
 
     /* добавление в БД */
     /* const addBD = async () => {        
