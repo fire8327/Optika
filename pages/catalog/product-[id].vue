@@ -5,17 +5,17 @@
                 <Swiper :loop="true" :space-between="20" :modules="[SwiperPagination, SwiperAutoplay, SwiperNavigation]" :navigation="{prevEl:'.productsPrev', nextEl:'.productsNext'}" :pagination="{ clickable: true }" :autoplay="{delay:3500}" class="w-full z-[1] rounded-md overflow-hidden">
                     <SwiperSlide class="w-full">
                         <NuxtLink class="w-full">
-                            <img class="object-cover aspect-video w-full" src="/img/hero/3.jpg" alt="">
+                            <img class="object-cover aspect-video w-full" :src="data[0].image" alt="">
                         </NuxtLink>
                     </SwiperSlide>
                     <SwiperSlide class="w-full">
                         <NuxtLink class="w-full">
-                            <img class="object-cover aspect-video w-full" src="/img/hero/4.jpg" alt="">
+                            <img class="object-cover aspect-video w-full" :src="data[0].image" alt="">
                         </NuxtLink>
                     </SwiperSlide>
                     <SwiperSlide class="w-full">
                         <NuxtLink class="w-full">
-                            <img class="object-cover aspect-video w-full" src="/img/hero/5.jpg" alt="">
+                            <img class="object-cover aspect-video w-full" :src="data[0].image" alt="">
                         </NuxtLink>
                     </SwiperSlide>
                 </Swiper>
@@ -27,13 +27,13 @@
                 </button>
             </div>
             <div class="lg:w-2/5 flex flex-col gap-6">
-                <p class="opacity-70 text-sm">ID:21212121</p>
+                <p class="opacity-70 text-sm">ID: {{ data[0].id }}</p>
                 <div class="flex flex-col gap-2">
-                    <p class="text-3xl font-semibold">Бренд</p>
-                    <p class="text-xl opacity-80">Название</p>
+                    <p class="text-3xl font-semibold">{{ data[0].brand }}</p>
+                    <p class="text-xl opacity-80">{{ data[0].title }}</p>
                 </div>
                 <div class="h-px rounded-full mx-auto w-[90%] bg-[#0C669C]/80"></div>
-                <p class="text-3xl text-[#3BBAC2]">500 000 000₽</p>
+                <p class="text-3xl text-[#3BBAC2]">{{ data[0].price.toLocaleString() }}₽</p>
                 <div class="h-px rounded-full mx-auto w-[90%] bg-[#0C669C]/80"></div>
                 <button class="bg-[#0C669C] rounded-full text-white px-4 py-2 w-1/2 mx-auto transition-all hover:animate-pulse">Купить</button>
                 <p class="text-lg">Товар: <span class="text-emerald-700">в наличии</span></p>
@@ -75,4 +75,16 @@
         title: 'Товар',
         lang: 'ru'
     })
+
+
+    /* получение id */
+    const route = useRoute()
+
+
+    /* подключение к БД */
+    const supabase = useSupabaseClient()
+    const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', `${route.params.id}`)
 </script>
