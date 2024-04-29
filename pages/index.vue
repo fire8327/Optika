@@ -46,11 +46,11 @@
     <div class="flex flex-col gap-6">
         <div class="flex items-center gap-2 text-xl md:text-2xl xl:text-3xl font-Comfortaa font-normal">
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
-            <p>Хиты продаж</p>
+            <p>Наши новинки</p>
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card v-for="card in cards" v-bind="card"></Card>
+            <Card v-for="product in products.slice(0,3)" v-bind="product"></Card>
         </div>
     </div>
     <Reviews></Reviews>
@@ -102,25 +102,12 @@
     /* создание сообщений */
     const { messageTitle, messageType } = storeToRefs(useMessagesStore())
 
-    const cards=[
-        {
-            image: "https://www.optic-city.ru/image/cache/rss/1/9/5/3/1/5/9/item_1953159/1953159_0-810x540.jpg.webp",
-            title: "Очки Boss 1428 0OC",
-            price: 14599,
-            id: 1
-        },
-        {
-            image: "https://www.optic-city.ru/image/cache/rss/1/8/1/7/8/3/5/item_1817835/1817835_0-810x540.jpg.webp",
-            title: "Очки RayBan 5228 5014 (55)",
-            price: 15749,
-            id: 2
-        },
-        {
-            image: "https://www.optic-city.ru/image/cache/rss/1/9/1/3/4/7/1/item_1913471/1913471_0-810x540.jpg.webp",
-            title: "Очки PRODESIGN 1762 1 9631",
-            price: 19899,
-            id: 3
-        }
-    ]
+
+    /* подключение к БД */
+    const supabase = useSupabaseClient()
+    const { data:products, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('id', { ascending: true })   
 </script>
 
