@@ -1,6 +1,6 @@
 <template>
     <div class="flex max-lg:flex-col gap-6">
-        <div class="flex flex-col border-2 border-[#0C669C] p-4 rounded-lg lg:w-1/4 gap-6">
+        <div class="flex flex-col border-2 border-[#0C669C]/60 p-4 rounded-lg lg:w-1/4 gap-6">
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Цена</p>
                 <div class="flex items-center gap-1">
