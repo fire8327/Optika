@@ -76,6 +76,7 @@
         products.value = filterData.value
     }
     modifyData()
+    
 
     /* управление select'ами и input'ами */
     const selectAge = ref(['Все'])
