@@ -4,39 +4,39 @@
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Цена</p>
                 <div class="flex items-center gap-1">
-                    <input class="w-1/2 rounded-l-md border border-[#3BBAC2] px-4 py-2" placeholder="От" type="text">
-                    <input class="w-1/2 rounded-r-md border border-[#3BBAC2] px-4 py-2" placeholder="До" type="text">
+                    <input v-model="filters.minPrice" class="w-1/2 rounded-l-md border border-[#3BBAC2] px-4 py-2" placeholder="От" type="text">
+                    <input v-model="filters.maxPrice" class="w-1/2 rounded-r-md border border-[#3BBAC2] px-4 py-2" placeholder="До" type="text">
                 </div>
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Возраст</p>
-                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="age">
+                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="age" v-model="filters.age">
                     <option :value="age" v-for="age in selectAge">{{ age }}</option>
                 </select>
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Тип</p>
-                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="type">
+                <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="type" v-model="filters.type">
                     <option :value="type" v-for="type in selectType">{{ type }}</option>
                 </select>
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Бренд</p>
                 <label class="flex items-center gap-2 text-lg" v-for="brand in inputBrand">
-                    <input type="checkbox" name="brand" class="w-5 h-5">
+                    <input type="checkbox" :value="brand" class="w-5 h-5" v-model="filters.brands">
                     {{ brand }}
                 </label>
             </div>
             <div class="flex flex-col gap-2">
                 <p class="text-2xl font-Comfortaa font-normal">Цвет</p>
                 <label class="flex items-center gap-2 text-lg" v-for="color in inputColor">
-                    <input type="checkbox" name="color" class="w-5 h-5">
+                    <input type="checkbox" :value="color" class="w-5 h-5" v-model="filters.colors">
                     {{ color }}
                 </label>
             </div>
             <div class="flex flex-col gap-2">
-                <button class="px-4 py-2 rounded-md text-white w-full text-center bg-[#3BBAC2]">Применить</button>
-                <button class="px-4 py-2 rounded-md text-[#3BBAC2] w-full text-center border border-[#3BBAC2]">Отменить</button>
+                <button @click="filterProducts" class="px-4 py-2 rounded-md text-white w-full text-center bg-[#3BBAC2]">Применить</button>
+                <button @click="cancelFilters" class="px-4 py-2 rounded-md text-[#3BBAC2] w-full text-center border border-[#3BBAC2]">Отменить</button>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 h-fit lg:grid-cols-3 lg:w-3/4 gap-4">
@@ -59,9 +59,23 @@
     .from('products')
     .select('*')
     .order('title', { ascending: true })   
-    
-    const products = ref(data) 
 
+    
+    /* модификация данных и поиск */
+    const { title } = storeToRefs(useSearchStore())
+    const products = ref() 
+    const filterData = ref()
+    const modifyData = () => {
+        products.value = data
+        filterData.value = products.value.filter(el => {
+            if(title.value && el.title.toLowerCase().indexOf(title.value.toLowerCase()) == -1) {
+                return false
+            }
+            return true
+        }) 
+        products.value = filterData.value
+    }
+    modifyData()
 
     /* управление select'ами и input'ами */
     const selectAge = ref(['Все'])
@@ -83,6 +97,54 @@
         }
     })
        
+
+    /* создание фильтров */    
+    const filters = ref({
+        minPrice: "",
+        maxPrice: "",
+        age: 'Все',
+        type: 'Все',
+        brands: [],
+        colors: []
+    })
+
+
+    /* фильтрация */    
+    const filterProducts = () => {
+        products.value = filterData.value
+        const filter = products.value.filter(el => {
+            if (el.price < filters.value.minPrice && filters.value.minPrice) {
+                return false
+            }
+            if (el.price > filters.value.maxPrice && filters.value.maxPrice) {
+                return false
+            }
+            if (el.type != filters.value.type && filters.value.type != 'Все') {
+                return false
+            }
+            if (el.age != filters.value.age && filters.value.age != 'Все') {
+                return false
+            }
+            if(filters.value.colors.indexOf(el.color) == -1 && filters.value.colors.length>0) {
+                return false
+            }
+            if(filters.value.brands.indexOf(el.brand) == -1 && filters.value.brands.length>0) {
+                return false
+            }
+            return true
+        })     
+        products.value = filter
+    }    
+    
+    const cancelFilters = () => {
+        products.value = data
+        filters.value.minPrice = ""
+        filters.value.maxPrice = ""
+        filters.value.age = "Все"
+        filters.value.type = "Все"
+        filters.value.brands = []
+        filters.value.colors = []
+    }
 
     /* добавление в БД */
     /* const addBD = async () => {        
