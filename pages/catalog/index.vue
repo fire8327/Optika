@@ -54,11 +54,11 @@
             </div>
             <div class="flex flex-col gap-2">
                 <button class="px-4 py-2 rounded-md text-white w-full text-center bg-[#3BBAC2]">Применить</button>
-                <button class="px-4 py-2 rounded-md text-[#3BBAC2] w-full text-center border border-[#3BBAC2]">Сбросить</button>
+                <button class="px-4 py-2 rounded-md text-[#3BBAC2] w-full text-center border border-[#3BBAC2]">Отменить</button>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 h-fit lg:grid-cols-3 lg:w-3/4 gap-4">
-            <Card v-for="card in cards" v-bind="card"></Card>
+            <Card v-for="product in products" v-bind="product"></Card>
         </div>
     </div>
 </template>
@@ -69,24 +69,49 @@
         title: 'Каталог',
         lang: 'ru'
     })
-    
 
-const cards=[
-    {
-        image: "https://www.optic-city.ru/image/cache/rss/1/9/5/3/1/5/9/item_1953159/1953159_0-810x540.jpg.webp",
-        title: "Очки Boss 1428 0OC",
-        price: 14599
-    },
-    {
-        image: "https://www.optic-city.ru/image/cache/rss/1/8/1/7/8/3/5/item_1817835/1817835_0-810x540.jpg.webp",
-        title: "Очки RayBan 5228 5014 (55)",
-        price: 15749
-    },
-    {
-        image: "https://www.optic-city.ru/image/cache/rss/1/9/1/3/4/7/1/item_1913471/1913471_0-810x540.jpg.webp",
-        title: "Очки PRODESIGN 1762 1 9631",
-        price: 19899
-    }
-]
+
+    /* подключение к БД */
+    const supabase = useSupabaseClient()
+    const { data: products, error } = await supabase
+    .from('products')
+    .select('*')
+            
+
+    /* добавление в БД */
+    /* const addBD = async () => {        
+        const { data, error } = await supabase
+        .from('products')
+        .insert([
+            {
+                image: "https://www.optic-city.ru/image/cache/rss/1/9/5/3/1/5/9/item_1953159/1953159_0-810x540.jpg.webp",
+                title: "Очки Boss 1428 0OC",
+                age: "Для взрослых",
+                type: "Готовые очки",
+                brand: "Boss",
+                color: "Зелёный",
+                price: 14599
+            },
+            {
+                image: "https://www.optic-city.ru/image/cache/rss/1/8/1/7/8/3/5/item_1817835/1817835_0-810x540.jpg.webp",
+                title: "Очки RayBan 5228 5014 (55)",
+                age: "Для взрослых",
+                type: "Готовые очки",
+                brand: "RayBan",
+                color: "Чёрный",
+                price: 15749
+            },
+            {
+                image: "https://www.optic-city.ru/image/cache/rss/1/9/1/3/4/7/1/item_1913471/1913471_0-810x540.jpg.webp",
+                title: "Очки PRODESIGN 1762 1 9631",
+                age: "Для взрослых",
+                type: "Готовые очки",
+                brand: "PRODESIGN",
+                color: "Зелёный",
+                price: 19899
+            }
+        ])
+        .select()          
+    } */
 </script>
 
