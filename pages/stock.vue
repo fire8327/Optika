@@ -5,9 +5,10 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Акции',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Акции',
+        lang: 'ru'
+    })
 </script>
 

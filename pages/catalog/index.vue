@@ -64,10 +64,12 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Каталог',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Каталог',
+        lang: 'ru'
+    })
+    
 
 const cards=[
     {

@@ -61,13 +61,14 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Админ-панель',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Админ-панель',
+        lang: 'ru'
+    })
 
 
-const isProductsShow = ref(true)
-
-const isOrdersShow = ref(false)
+    /* показ форм */
+    const isProductsShow = ref(true)
+    const isOrdersShow = ref(false)
 </script>

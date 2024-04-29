@@ -92,32 +92,35 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Оптика',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Оптика',
+        lang: 'ru'
+    })
 
-const { messageTitle, messageType } = storeToRefs(useMessagesStore())
 
-const cards=[
-    {
-        image: "https://www.optic-city.ru/image/cache/rss/1/9/5/3/1/5/9/item_1953159/1953159_0-810x540.jpg.webp",
-        title: "Очки Boss 1428 0OC",
-        price: 14599,
-        id: 1
-    },
-    {
-        image: "https://www.optic-city.ru/image/cache/rss/1/8/1/7/8/3/5/item_1817835/1817835_0-810x540.jpg.webp",
-        title: "Очки RayBan 5228 5014 (55)",
-        price: 15749,
-        id: 2
-    },
-    {
-        image: "https://www.optic-city.ru/image/cache/rss/1/9/1/3/4/7/1/item_1913471/1913471_0-810x540.jpg.webp",
-        title: "Очки PRODESIGN 1762 1 9631",
-        price: 19899,
-        id: 3
-    }
-]
+    /* создание сообщений */
+    const { messageTitle, messageType } = storeToRefs(useMessagesStore())
+
+    const cards=[
+        {
+            image: "https://www.optic-city.ru/image/cache/rss/1/9/5/3/1/5/9/item_1953159/1953159_0-810x540.jpg.webp",
+            title: "Очки Boss 1428 0OC",
+            price: 14599,
+            id: 1
+        },
+        {
+            image: "https://www.optic-city.ru/image/cache/rss/1/8/1/7/8/3/5/item_1817835/1817835_0-810x540.jpg.webp",
+            title: "Очки RayBan 5228 5014 (55)",
+            price: 15749,
+            id: 2
+        },
+        {
+            image: "https://www.optic-city.ru/image/cache/rss/1/9/1/3/4/7/1/item_1913471/1913471_0-810x540.jpg.webp",
+            title: "Очки PRODESIGN 1762 1 9631",
+            price: 19899,
+            id: 3
+        }
+    ]
 </script>
 

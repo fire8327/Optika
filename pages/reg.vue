@@ -31,49 +31,57 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Регистрация',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Регистрация',
+        lang: 'ru'
+    })
 
-const supabase = useSupabaseClient()
-const regForm = ref({
-    name:"",
-    surname:"",
-    email:"",
-    password:""
-})
 
-const userStore = useUserStore()
-const { messageTitle, messageType } = storeToRefs(useMessagesStore())
-const router = useRouter()
-const reg = async() => {
-    let { data: users, error: usersError } = await supabase
-    .from('users')
-    .select("*")
-    .eq('email', `${regForm.value.email}`)
+    /* создание формы и подключение к БД */
+    const supabase = useSupabaseClient()
+    const regForm = ref({
+        name:"",
+        surname:"",
+        email:"",
+        password:""
+    })
 
-    if (users[0]) {
-        regForm.value.email = ""
-        messageTitle.value = 'Такая почта уже используется!', messageType.value = false
-        setTimeout(() => {
-            messageTitle.value = null
-        }, 3000)
-    } else {
-        const { data, error } = await supabase
+
+    /* создание сообщений */
+    const { messageTitle, messageType } = storeToRefs(useMessagesStore())
+
+
+    /* создание роутера и отправка формы */
+    const userStore = useUserStore()
+    const router = useRouter()
+    const reg = async() => {
+        let { data: users, error: usersError } = await supabase
         .from('users')
-        .insert([
-            { name: regForm.value.name, surname: regForm.value.surname, email: regForm.value.email, password: regForm.value.password, role: 'user'},
-        ])
-        .select()
-        if (data) {
-            console.log(data[0])
-            messageTitle.value = 'Успешная регистрация!', messageType.value = true 
+        .select("*")
+        .eq('email', `${regForm.value.email}`)
+
+        if (users[0]) {
+            regForm.value.email = ""
+            messageTitle.value = 'Такая почта уже используется!', messageType.value = false
             setTimeout(() => {
                 messageTitle.value = null
-            }, 3000) 
-            router.push('/auth')
+            }, 3000)
+        } else {
+            const { data, error } = await supabase
+            .from('users')
+            .insert([
+                { name: regForm.value.name, surname: regForm.value.surname, email: regForm.value.email, password: regForm.value.password, role: 'user'},
+            ])
+            .select()
+            if (data) {
+                console.log(data[0])
+                messageTitle.value = 'Успешная регистрация!', messageType.value = true 
+                setTimeout(() => {
+                    messageTitle.value = null
+                }, 3000) 
+                router.push('/auth')
+            }
         }
-    }
-}  
+    }  
 </script>

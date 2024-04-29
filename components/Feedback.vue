@@ -46,21 +46,22 @@
 </template>
 
 <script setup>
+    /* отправка формы в тг */
 
-const token = "7082146541:AAETwhFCqedtNq-qTHNL9e9hf7Mc-F0Qr0E"
-const chatId = "-4122136911"
-const URL = `https://api.telegram.org/bot${token}/sendMessage`
+    const token = "7082146541:AAETwhFCqedtNq-qTHNL9e9hf7Mc-F0Qr0E"
+    const chatId = "-4122136911"
+    const URL = `https://api.telegram.org/bot${token}/sendMessage`
 
-let message = ref({
-    title:null,
-    type:true
-})
-const form = ref({
-    name:"",
-    number:""
-})
+    let message = ref({
+        title:null,
+        type:true
+    })
+    const form = ref({
+        name:"",
+        number:""
+    })
 
-const feedback = async () => {
+    const feedback = async () => {
         let msg = "<b>Сообщение с сайта!</b>\n"
         + `<b>Имя:</b> ${form.value.name}\n`
         + `<b>Телефон:</b> ${form.value.number}\n`
@@ -80,5 +81,4 @@ const feedback = async () => {
             message.value.title = null
         }, 3000);
     }
-
 </script>

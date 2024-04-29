@@ -49,8 +49,9 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'О нас',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'О нас',
+        lang: 'ru'
+    })
 </script>

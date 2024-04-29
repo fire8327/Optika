@@ -25,58 +25,67 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Вход',
-    lang: 'ru'
-})
-const supabase = useSupabaseClient()
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Вход',
+        lang: 'ru'
+    })
 
-const authForm = ref({
-    email:"",
-    password:""
-})
 
-const userStore = useUserStore()
-const { messageTitle, messageType } = storeToRefs(useMessagesStore())
-const router = useRouter()
-const auth = async() => {
-    
-    let { data: users, error } = await supabase
-    .from('users')
-    .select("*")
-    .eq('email', `${authForm.value.email}`)
+    /* подключение к БД */
+    const supabase = useSupabaseClient()
 
-    if (!users[0]) {
-        messageTitle.value = 'Неверно введена почта!', messageType.value = false
-        authForm.value.email = ""
-        setTimeout(() => {
-            messageTitle.value = null
-        }, 3000) 
-    } else { 
-        console.log(users[0])  
-        if (authForm.value.password != users[0].password){
-            messageTitle.value = 'Неверно введен пароль!', messageType.value = false
-            authForm.value.password = ""
+
+    /* создание формы */
+    const authForm = ref({
+        email:"",
+        password:""
+    })
+
+
+    /* создание сообщений */
+    const { messageTitle, messageType } = storeToRefs(useMessagesStore())
+
+
+    /* отправка формы и создание роутера */
+    const userStore = useUserStore()
+    const router = useRouter()
+    const auth = async() => {    
+        let { data: users, error } = await supabase
+        .from('users')
+        .select("*")
+        .eq('email', `${authForm.value.email}`)
+
+        if (!users[0]) {
+            messageTitle.value = 'Неверно введена почта!', messageType.value = false
+            authForm.value.email = ""
             setTimeout(() => {
                 messageTitle.value = null
             }, 3000) 
-        } else {
-            messageTitle.value = 'Успешный вход!', messageType.value = true
-            setTimeout(() => {
-                messageTitle.value = null
-            }, 3000) 
-            userStore.authenticated = true
-            userStore.id = users[0].id 
-            if (users[0].role != 'admin') {
-                userStore.role = "user"
-                router.push('/')
+        } else { 
+            console.log(users[0])  
+            if (authForm.value.password != users[0].password){
+                messageTitle.value = 'Неверно введен пароль!', messageType.value = false
+                authForm.value.password = ""
+                setTimeout(() => {
+                    messageTitle.value = null
+                }, 3000) 
             } else {
-                userStore.role = "admin"
-                console.log(users[0].role)
-                router.push('/admin')
+                messageTitle.value = 'Успешный вход!', messageType.value = true
+                setTimeout(() => {
+                    messageTitle.value = null
+                }, 3000) 
+                userStore.authenticated = true
+                userStore.id = users[0].id 
+                if (users[0].role != 'admin') {
+                    userStore.role = "user"
+                    router.push('/')
+                } else {
+                    userStore.role = "admin"
+                    console.log(users[0].role)
+                    router.push('/admin')
+                }
             }
         }
-    }
-}   
-
+    }   
 </script>

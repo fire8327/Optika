@@ -50,15 +50,16 @@
 </template>
 
 <script setup>
-const supabase = useSupabaseClient()
+    /* подключение к БД */
+    const supabase = useSupabaseClient()
 
-const { data:reviews, error } = await supabase
-  .from('reviews')
-  .select(`
-    desc,
-    users (
-      name,
-      surname
-    )
-  `)
+    const { data:reviews, error } = await supabase
+    .from('reviews')
+    .select(`
+        desc,
+        users (
+        name,
+        surname
+        )
+    `)
 </script>

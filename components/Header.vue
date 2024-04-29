@@ -53,11 +53,14 @@
 </template>
 
 <script setup>
-import { useUserStore } from '~/stores/user';
-
+    /* открытие меню */
     const isMenuShow = ref(false)
+    
+
+    /* проверка входа и выход */
     const {authenticated, role} = storeToRefs(useUserStore())
     const router = useRouter()
+
     const logout = () => {
         authenticated.value = false
         role.value = null

@@ -70,8 +70,9 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Товар',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Товар',
+        lang: 'ru'
+    })
 </script>

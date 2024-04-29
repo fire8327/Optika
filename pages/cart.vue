@@ -52,28 +52,32 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Корзина',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Корзина',
+        lang: 'ru'
+    })
 
-const detailsForm = ref({
-    delivery: "",
-    address: "",
-    code: "",
-    codeType: false,
-    codeTitle: "",
-    sum: 0
-})
 
-function checkCode() {
-    if (detailsForm.value.code == "123") {
-        detailsForm.value.codeType = true
-        detailsForm.value.codeTitle = 'Промокод активирован 😀'
-    } else {
-        detailsForm.value.codeType = false
-        detailsForm.value.codeTitle = 'Промокод не найден 😯'
+    /* создание формы */
+    const detailsForm = ref({
+        delivery: "",
+        address: "",
+        code: "",
+        codeType: false,
+        codeTitle: "",
+        sum: 0
+    })
+
+
+    /* проверка промокода */
+    function checkCode() {
+        if (detailsForm.value.code == "123") {
+            detailsForm.value.codeType = true
+            detailsForm.value.codeTitle = 'Промокод активирован 😀'
+        } else {
+            detailsForm.value.codeType = false
+            detailsForm.value.codeTitle = 'Промокод не найден 😯'
+        }
     }
-}
-
 </script>

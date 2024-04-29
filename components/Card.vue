@@ -9,7 +9,8 @@
 </template>
 
 <script setup>
-const props = defineProps({
+    /* пропсы */
+    const props = defineProps({
         image: String,
         title: String,
         price: Number,

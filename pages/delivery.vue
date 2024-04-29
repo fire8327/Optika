@@ -111,10 +111,13 @@
 </template>
 
 <script setup>
-useServerSeoMeta({
-    title: 'Доставка',
-    lang: 'ru'
-})
+    /* название страницы */
+    useServerSeoMeta({
+        title: 'Доставка',
+        lang: 'ru'
+    })
 
-const isDeliveryShow = ref(true)
+
+    /* показ формы */
+    const isDeliveryShow = ref(true)
 </script>
