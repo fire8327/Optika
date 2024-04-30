@@ -138,7 +138,7 @@
     }    
     
     const cancelFilters = () => {
-        products.value = data
+        products.value = filterData.value
         filters.value.minPrice = ""
         filters.value.maxPrice = ""
         filters.value.age = "Все"
