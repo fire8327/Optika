@@ -20,7 +20,7 @@
                     </NuxtLink>
                 </div>
                 <div class="flex gap-8 items-center max-md:gap-4 max-lg:flex-wrap max-lg:justify-center">
-                    <form class="relative max-lg:w-full" @submit="submitSearch">
+                    <form class="relative max-lg:w-full">
                         <input v-model="title" class="rounded-full border border-[#3BBAC2] pl-4 py-1 pr-10 w-full focus:outline-none focus:ring-0 focus:appearance-none" type="text">
                         <NuxtLink to="/catalog" class="absolute top-1/2 -translate-y-1/2 right-3">
                             <Icon class="text-2xl text-[#3BBAC2]" name="gravity-ui:magnifier"/>
