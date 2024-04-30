@@ -25,7 +25,7 @@
             {{ detailsForm }}
             <div class="flex items-center justify-between gap-2">
                 <p class="">Итого:</p>
-                <p class="text-[#3BBAC2] text-3xl">0 ₽</p>
+                <p class="text-[#3BBAC2] text-3xl">{{ sum.toLocaleString() }} ₽</p>
             </div>
             <button class="px-4 py-2 rounded-md bg-[#3BBAC2] text-white text-center">Оформить заказ</button>
         </div>
@@ -51,8 +51,7 @@
         address: "",
         code: "",
         codeType: false,
-        codeTitle: "",
-        sum: 0
+        codeTitle: ""
     })
 
 
@@ -67,6 +66,13 @@
     .select(`*, products (*)`)
     .eq('status', 'В корзине')
     .eq('userId', `${id.value}`)
+
+
+    /* итоговая сумма */
+    const sum = ref(0)
+    carts.forEach(el => {
+        sum.value += el.count*el.products.price 
+    })
 
 
     /* проверка промокода */
