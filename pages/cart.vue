@@ -7,21 +7,22 @@
             <p class="text-2xl">Детали заказа</p>
             <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between gap-2">
-                    <label class="flex items-center gap-2 cursor-pointer"><input name="delivery" value="delivery" type="radio" v-model="detailsForm.delivery">Доставка</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input name="delivery" value="Доставка" type="radio" v-model="detailsForm.delivery">Доставка</label>
                     <p class="text-[#3BBAC2]">300 ₽</p>
                 </div>
                 <div class="flex items-center justify-between gap-2">
-                    <label class="flex items-center gap-2 cursor-pointer"><input name="delivery" value="pickup" type="radio" v-model="detailsForm.delivery">Самовывоз</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input name="delivery" value="Самовывоз" type="radio" v-model="detailsForm.delivery">Самовывоз</label>
                     <p class="text-[#3BBAC2]">0 ₽</p>
                 </div>
             </div>
-            <textarea class="px-4 py-2 rounded-md border border-[#3BBAC2]" placeholder="Укажите адрес доставки" v-if="detailsForm.delivery == 'delivery'" v-model="detailsForm.address"></textarea>
-            <p v-if="detailsForm.delivery == 'pickup'">Самовывоз по адресу: Кронштадтский бул., 37Б</p>
+            <textarea class="px-4 py-2 rounded-md border border-[#3BBAC2]" placeholder="Укажите адрес доставки" v-if="detailsForm.delivery == 'Доставка'" v-model="detailsForm.address"></textarea>
+            <p v-if="detailsForm.delivery == 'Самовывоз'">Самовывоз по адресу: Кронштадтский бул., 37Б</p>
             <div class="flex flex-col gap-2">
                 <input class="px-4 py-2 rounded-md border border-[#3BBAC2]" v-model="detailsForm.code" placeholder="Укажите промокод" type="text">
                 <button @click="checkCode" class="px-4 py-2 rounded-md border border-[#3BBAC2] text-[#3BBAC2] text-center">Применить</button>
                 <p class="text-base" :class="detailsForm.codeType ? 'text-emerald-800' : 'text-[#E71616]'" v-if="detailsForm.codeTitle">{{ detailsForm.codeTitle }}</p>
             </div>
+            {{ detailsForm }}
             <div class="flex items-center justify-between gap-2">
                 <p class="">Итого:</p>
                 <p class="text-[#3BBAC2] text-3xl">0 ₽</p>
