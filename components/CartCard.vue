@@ -37,6 +37,10 @@
         .update({ count: `${countProduct.value}` })
         .eq('id', `${props.id}`)
         .select()  
+
+        setTimeout(() => {
+            router.go()               
+        }, 1500)   
     }
     const minusCard = async () => {
         if (countProduct.value > 1) {
@@ -47,6 +51,10 @@
             .update({ count: `${countProduct.value}` })
             .eq('id', `${props.id}`)
             .select() 
+
+            setTimeout(() => {
+                router.go()               
+            }, 1500)   
         }
     }
 
