@@ -35,7 +35,7 @@
                 <div class="h-px rounded-full mx-auto w-[90%] bg-[#0C669C]/80"></div>
                 <p class="text-3xl text-[#3BBAC2]">{{ data[0].price.toLocaleString() }}₽</p>
                 <div class="h-px rounded-full mx-auto w-[90%] bg-[#0C669C]/80"></div>
-                <button class="bg-[#0C669C] rounded-full text-white px-4 py-2 w-1/2 mx-auto transition-all hover:animate-pulse">Купить</button>
+                <button @click="addCart" v-if="authenticated && role == 'user'" class="bg-[#0C669C] rounded-full text-white px-4 py-2 w-1/2 mx-auto transition-all hover:animate-pulse">Купить</button>
                 <p class="text-lg">Товар: <span class="text-emerald-700">в наличии</span></p>
             </div>
         </div>
@@ -77,8 +77,9 @@
     })
 
 
-    /* получение id */
+    /* получение id товара и проверка пользователя */
     const route = useRoute()
+    const {authenticated, role, id} = storeToRefs(useUserStore())
 
 
     /* подключение к БД */
@@ -87,4 +88,55 @@
     .from('products')
     .select('*')
     .eq('id', `${route.params.id}`)
+
+
+    /* создание сообщений */
+    const { messageTitle, messageType } = storeToRefs(useMessagesStore())
+
+
+    /* добавление в корзину */
+    const addCart = async () => {
+        const { data: carts, error } = await supabase
+        .from('cart')
+        .select(`*, products (*)`)
+        .eq('status', 'В корзине')
+        .eq('userId', `${id.value}`)
+        .eq('productId', `${route.params.id}`)
+
+        console.log(carts)
+
+        if(carts.length>0) {
+            const { data, error } = await supabase
+            .from('cart')
+            .update({ count: `${Number(carts[0].count)+1}` })
+            .eq('status', 'В корзине')
+            .eq('userId', `${id.value}`)
+            .eq('productId', `${route.params.id}`)
+            .select()      
+        
+            messageTitle.value = 'Количество обновлено!', messageType.value = true
+            setTimeout(() => {
+                messageTitle.value = null
+            }, 3000)
+        } else {            
+            const { data, error } = await supabase
+            .from('cart')
+            .insert([
+                { userId: `${id.value}`, productId: `${route.params.id}`, status: 'В корзине', count: 1 },
+            ])
+            .select()       
+            
+            if(data) {
+                messageTitle.value = 'Добавлено в корзину!', messageType.value = true
+                setTimeout(() => {
+                    messageTitle.value = null
+                }, 3000)
+            } else {
+                messageTitle.value = 'Произошла ошибка!', messageType.value = false
+                setTimeout(() => {
+                    messageTitle.value = null
+                }, 3000) 
+            }            
+        }
+    }
 </script>

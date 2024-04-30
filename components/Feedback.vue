@@ -34,10 +34,6 @@
                             <FormKit v-model="form.number" validation="required|length:11" outer-class="$remove:mb-4 md:w-4/5" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="$remove:text-gray-700 $remove:border-none w-full border border-[#0C669C] px-4 py-1 w-full focus:outline-none focus:ring-0 focus:appearance-none rounded-md" name="Телефон" placeholder="Телефон" type="mask" mask="+7 (###) ### ## ##"/>
                         </div>
                         <FormKit type="submit" input-class="font-semibold bg-gradient-to-br from-[#0C669C] to-[#3BBAC2] rounded-md text-white text-center w-full py-2 hover:opacity-80 transition-all duration-300 $remove:focus-visible:outline-blue-600 $remove:focus-visible:outline-offset-2 $remove:bg-blue-600 $remove:focus-visible:outline-2 $remove:inline-flex $remove:text-sm">Звонок</FormKit>
-                        <button type="button" @click="message.title = null" class="fixed top-10 right-10 z-[11] cursor-pointer flex items-center gap-4 px-6 py-2 rounded-2xl w-fit text-[#131313] shadow-[0_0_20px_-7px]" :class="message.type ? ' bg-[#BDE595]' : 'bg-red-500'" v-if="message.title">
-                            <span>{{message.title}}</span>
-                            <Icon name="material-symbols:close-rounded" class="text-xl"/>
-                        </button>
                     </FormKit>
                 </div>
             </div>
@@ -46,16 +42,16 @@
 </template>
 
 <script setup>
+    /* создание сообщений */
+    const { messageTitle, messageType } = storeToRefs(useMessagesStore())
+
+
     /* отправка формы в тг */
 
     const token = "7082146541:AAETwhFCqedtNq-qTHNL9e9hf7Mc-F0Qr0E"
     const chatId = "-4122136911"
     const URL = `https://api.telegram.org/bot${token}/sendMessage`
 
-    let message = ref({
-        title:null,
-        type:true
-    })
     const form = ref({
         name:"",
         number:""
@@ -73,12 +69,12 @@
             },
             method:'post'        
       })
-        if (error.value) return message.value.title = 'При отправке произошла ошибка!', message.value.type = false
-        message.value.title = 'Успешная отправка!', message.value.type = true 
+        if (error.value) return messageTitle.value = 'При отправке произошла ошибка!', messageType.value = false
+        messageTitle.value = 'Успешная отправка!', messageType.value = true 
         form.value.name = ""
         form.value.number = ""
         setTimeout(() => {
-            message.value.title = null
+            messageTitle.value = null
         }, 3000);
     }
 </script>

@@ -16,10 +16,6 @@
                 <div class="h-px w-1/6 bg-black/70"></div>
             </div>
             <NuxtLink to="/reg" class="bg-[#3BBAC2] rounded-full mx-auto text-white text-center md:w-1/4 max-md:px-6 py-2 hover:opacity-80 transition-all duration-300">Регистрация</NuxtLink>
-            <button type="button" @click="messageTitle = null" class="fixed top-10 right-10 z-[11] cursor-pointer flex items-center gap-4 px-6 py-2 rounded-2xl w-fit text-white shadow-[0_0_20px_-7px]" :class="messageType ? ' bg-emerald-800' : 'bg-red-500'" v-if="messageTitle">
-                <span>{{messageTitle}}</span>
-                <Icon name="material-symbols:close-rounded" class="text-xl"/>
-            </button>
         </FormKit>
     </div>
 </template>
