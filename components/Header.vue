@@ -29,7 +29,7 @@
                     <NuxtLink to="/cart" v-if="authenticated">
                         <Icon class="text-2xl text-[#3BBAC2]" name="material-symbols:shopping-cart-outline"/>
                     </NuxtLink>
-                    <NuxtLink to="/" v-if="authenticated">
+                    <NuxtLink to="/profile" v-if="authenticated">
                         <Icon class="text-2xl text-[#3BBAC2]" name="material-symbols:account-circle-full"/>
                     </NuxtLink>
                     <button @click="logout" v-if="authenticated" class="bg-gradient-to-r from-[#0C669C] to-[#3BBAC2] text-white py-1.5 px-7 rounded-lg hover:opacity-80 transition-all duration-300">
