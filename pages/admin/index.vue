@@ -13,8 +13,18 @@
                 <FormKit v-model="productForm.age" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Возрастная категория" placeholder="Возрастная категория" type="select" :options="['Для детей','Для взрослых']"/>                    
                 <FormKit v-model="productForm.brand" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Бренд" placeholder="Бренд" type="text"/>                    
                 <FormKit v-model="productForm.color" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Цвет" placeholder="Цвет товара" type="text"/>                    
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="flex items-center max-lg:flex-col gap-2" v-for="characteristic in characteristics">
+                        <FormKit v-model="characteristic.title" validation="required" outer-class="$remove:mb-4 w-full lg:w-1/2" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" :name="`Наименование${characteristicCount}`" placeholder="Наименование характеристики" type="text"/>                    
+                        <FormKit v-model="characteristic.value" validation="required" outer-class="$remove:mb-4 w-full lg:w-1/2" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" :name="`Значение${characteristicCount}`" placeholder="Значение характеристики" type="text"/>                    
+                    </div>
+                </div>
+                <button @click="addCharacteristic" type="button" class="px-4 py-2 rounded-xl text-white bg-[#3BBAC2] mx-auto">
+                    <Icon class="text-2xl" name="material-symbols:exposure-plus-1"/>
+                </button>
                 <FormKit @change="imageToBase" multiple="true" ref="inputImage" accept=".png,.jpg,.jpeg,.svg,.webp,.bmp" type="file" name="Фото" validation="required|min:3" messages-class="text-[#E9556D] font-Comfortaa text-base mt-2" outer-class="w-full" inner-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full bg-white"/>      
-                <FormKit type="submit" input-class="bg-[#0C669C] rounded-full font-semibold text-white text-center max-md:px-6 py-2 hover:opacity-80 transition-all duration-300 $remove:focus-visible:outline-blue-600 $remove:focus-visible:outline-offset-2 $remove:bg-blue-600 $remove:focus-visible:outline-2 $remove:inline-flex $remove:text-sm">Регистрация</FormKit>            </div>
+                <FormKit type="submit" input-class="bg-[#3BBAC2] rounded-full font-semibold text-white text-center max-md:px-6 py-2 hover:opacity-80 transition-all duration-300 $remove:focus-visible:outline-blue-600 $remove:focus-visible:outline-offset-2 $remove:bg-blue-600 $remove:focus-visible:outline-2 $remove:inline-flex $remove:text-sm">Добавить</FormKit>
+            </div>
         </FormKit>
     </div>
     <div class="flex flex-col gap-6">
@@ -186,6 +196,23 @@
     }
 
 
+    /* управление характеристиками */
+    const characteristics = ref([
+        {
+            title: "",
+            value: ""
+        }
+    ]) 
+    const characteristicCount = ref(1)
+    const addCharacteristic = (slot) => {
+        characteristics.value.push({
+            title: "",
+            value: ""
+        })
+        characteristicCount.value++
+    }
+
+
     /* добавление товара */    
     const productForm = ref({
         title: "",
@@ -199,15 +226,23 @@
         const { data, error } = await supabase
         .from('products')
         .insert([
-            { image: `${formImages[0]}`, image2: `${formImages[1]}`, image3: `${formImages[2]}`, title: `${productForm.value.title}`, price: `${productForm.value.price}`, type: `${productForm.value.type}`, brand: `${productForm.value.brand}`, color: `${productForm.value.color}`, age: `${productForm.value.age}`, characteristic: '' },
+            { image: `${formImages[0]}`, image2: `${formImages[1]}`, image3: `${formImages[2]}`, title: `${productForm.value.title}`, price: `${productForm.value.price}`, type: `${productForm.value.type}`, brand: `${productForm.value.brand}`, color: `${productForm.value.color}`, age: `${productForm.value.age}`, characteristic: `${characteristics}` },
         ])
         .select()
           
-        messageTitle.value = 'Товар добавлен!', messageType.value = true 
-        setTimeout(() => {
-            router.go()
-            messageTitle.value = null
-        }, 1500) 
+        if(data) {
+            console.log(data[0])
+            messageTitle.value = 'Товар добавлен!', messageType.value = true 
+            setTimeout(() => {
+                router.go()
+                messageTitle.value = null
+            }, 1500) 
+        } else {
+            messageTitle.value = 'Произошла ошибка!', messageType.value = false 
+            setTimeout(() => {
+                messageTitle.value = null
+            }, 3000) 
+        }
     }
 
 
