@@ -10,12 +10,12 @@
                     </SwiperSlide>
                     <SwiperSlide class="w-full">
                         <NuxtLink class="w-full">
-                            <img class="object-cover aspect-video w-full" :src="data[0].image" alt="">
+                            <img class="object-cover aspect-video w-full" :src="data[0].image1" alt="">
                         </NuxtLink>
                     </SwiperSlide>
                     <SwiperSlide class="w-full">
                         <NuxtLink class="w-full">
-                            <img class="object-cover aspect-video w-full" :src="data[0].image" alt="">
+                            <img class="object-cover aspect-video w-full" :src="data[0].image2" alt="">
                         </NuxtLink>
                     </SwiperSlide>
                 </Swiper>
