@@ -66,6 +66,8 @@
         </button>
         <div class="flex flex-col gap-8 text-lg rounded-xl relative lg:w-1/2 transition-all duration-500 overflow-hidden" :class="isOrdersShow ? 'h-full border border-[#3BBAC2] p-4' : 'h-0'" v-for="order in ordersArray">
             <div class="flex flex-col gap-4">
+                <p><span class="font-Comfortaa">Заказчик:</span> <span class="font-bold">{{ order[0].users.surname }} {{ order[0].users.name }}</span></p>
+                <p><span class="font-Comfortaa">ID заказчика:</span> <span class="font-bold">{{ order[0].users.id }}</span></p>
                 <p><span class="font-Comfortaa">Номер заказа:</span> <span class="font-bold">{{ order[0].orderId }}</span></p>
                 <p><span class="font-Comfortaa">Статус заказа:</span> <span class="font-bold">{{ order[0].status }}</span></p>
                 <p><span class="font-Comfortaa">Адрес:</span> <span class="font-bold">{{ order[0].address }}</span></p>
@@ -113,7 +115,8 @@
     const orderNumbers = []
     const { data: carts } = await supabase
     .from('cart')
-    .select(`*, products (*), users (*)`)
+    .select(`*, products (*), users (*)`)    
+    .neq('status','В корзине')
     .order('status', { ascending: true })
     carts.forEach(el => {
         if(orderNumbers.indexOf(el.orderId) === -1) {

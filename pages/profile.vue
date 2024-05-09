@@ -101,6 +101,7 @@
     .from('cart')
     .select(`*, products (*)`)
     .eq('userId',`${id.value}`)
+    .neq('status','В корзине')
     carts.forEach(el => {
         if(orderNumbers.indexOf(el.orderId) === -1) {
             orderNumbers.push(el.orderId)

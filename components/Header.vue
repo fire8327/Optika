@@ -29,7 +29,7 @@
                             <Icon class="text-2xl text-[#3BBAC2]" name="gravity-ui:magnifier"/>
                         </NuxtLink>
                     </form>
-                    <NuxtLink to="/cart" v-if="authenticated">
+                    <NuxtLink to="/cart" v-if="authenticated && role == 'user'">
                         <Icon class="text-2xl text-[#3BBAC2]" name="material-symbols:shopping-cart-outline"/>
                     </NuxtLink>
                     <NuxtLink to="/profile" v-if="authenticated">

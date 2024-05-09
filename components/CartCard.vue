@@ -1,6 +1,6 @@
 <template>
     <div class="flex max-lg:flex-col border-2 border-[#0C669C] rounded-md gap-8 px-12 py-10 bg-white">
-        <img class="w-1/2" :src="props.products.image" alt="">
+        <img class="w-1/2 object-cover aspect-video rounded-xl" :src="props.products.image" alt="">
         <div class="flex flex-col gap-4">
             <p class="text-xl">{{ props.products.title }}</p>
             <div class="flex items-center gap-4">
