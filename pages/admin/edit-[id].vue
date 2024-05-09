@@ -27,7 +27,7 @@
                 <button @click="addCharacteristic" type="button" class="px-4 py-2 rounded-xl text-white bg-[#3BBAC2] mx-auto">
                     <Icon class="text-2xl" name="material-symbols:exposure-plus-1"/>
                 </button>
-                <FormKit @change="imageToBase" multiple="true" ref="inputImage" accept=".png,.jpg,.jpeg,.svg,.webp,.bmp" type="file" name="Фото" messages-class="text-[#E9556D] font-Comfortaa text-base mt-2" outer-class="w-full" inner-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full bg-white"/>      
+                <FormKit @change="imageToBase" multiple="true" accept=".png,.jpg,.jpeg,.svg,.webp,.bmp" type="file" name="Фото" messages-class="text-[#E9556D] font-Comfortaa text-base mt-2" outer-class="w-full" inner-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full bg-white"/>      
                 <FormKit type="submit" input-class="bg-[#3BBAC2] rounded-full font-semibold text-white text-center max-md:px-6 py-2 hover:opacity-80 transition-all duration-300 $remove:focus-visible:outline-blue-600 $remove:focus-visible:outline-offset-2 $remove:bg-blue-600 $remove:focus-visible:outline-2 $remove:inline-flex $remove:text-sm">Обновить</FormKit>
             </div>
         </FormKit>
@@ -71,7 +71,6 @@
         formImages[2] = products[0].image2 
     } 
 
-    const inputImage = ref()
     const imageToBase = (el) => {
         const files = el.target.files
         console.log(files)
