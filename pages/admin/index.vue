@@ -5,7 +5,17 @@
             <p>Добавление товара</p>
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
         </div>
-        <NuxtLink class="px-4 py-2 text-white bg-emerald-800 rounded-md w-fit" to="">Добавить товар</NuxtLink>
+        <FormKit @submit="addProduct" type="form" form-class="flex flex-col gap-6 full" :actions="false" messages-class="hidden">
+            <div class="flex flex-col gap-6 xl:gap-4 items-center w-full">
+                <FormKit v-model="productForm.title" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Наименование" placeholder="Наименование товара" type="text"/>                    
+                <FormKit v-model="productForm.price" validation="required|number" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Цена" placeholder="Цена" type="text"/>                    
+                <FormKit v-model="productForm.type" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Тип" placeholder="Тип товара" type="select" :options="['Готовые очки','Оправы','Линзы','Контактные линзы','Солнцезащитные очки']"/>                    
+                <FormKit v-model="productForm.age" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Возрастная категория" placeholder="Возрастная категория" type="select" :options="['Для детей','Для взрослых']"/>                    
+                <FormKit v-model="productForm.brand" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Бренд" placeholder="Бренд" type="text"/>                    
+                <FormKit v-model="productForm.color" validation="required" outer-class="$remove:mb-4 w-full" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" name="Цвет" placeholder="Цвет товара" type="text"/>                    
+                <FormKit @change="imageToBase" multiple="true" ref="inputImage" accept=".png,.jpg,.jpeg,.svg,.webp,.bmp" type="file" name="Фото" validation="required|min:3" messages-class="text-[#E9556D] font-Comfortaa text-base mt-2" outer-class="w-full" inner-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full bg-white"/>      
+                <FormKit type="submit" input-class="bg-[#0C669C] rounded-full font-semibold text-white text-center max-md:px-6 py-2 hover:opacity-80 transition-all duration-300 $remove:focus-visible:outline-blue-600 $remove:focus-visible:outline-offset-2 $remove:bg-blue-600 $remove:focus-visible:outline-2 $remove:inline-flex $remove:text-sm">Регистрация</FormKit>            </div>
+        </FormKit>
     </div>
     <div class="flex flex-col gap-6">
         <button @click="isProductsShow = !isProductsShow" class="flex items-center gap-2 text-xl md:text-2xl xl:text-3xl font-Comfortaa font-normal w-fit">
@@ -13,26 +23,23 @@
             <span>Список товаров</span>
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
         </button>
-
-        <!-- <div class="flex flex-col gap-6 rounded-lg overflow-hidden text-left bg-gray-200 transition-all duration-500" :class="isProductsShow ? 'h-full' : 'h-0'">
-            <div class="w-full gap-x-6 grid grid-cols-6 bg-[#0C669C] px-6 py-2 text-white">
-                <p class="col-span-1">ID</p>
-                <p class="col-span-1">Название</p>
-                <p class="col-span-2">Изображение</p>
-                <p class="col-span-1">Цена</p>
-                <p class="col-span-1">Изменить/Удалить</p>
-            </div>
-            <div class="w-full gap-x-6 grid grid-cols-6 px-6 py-2">
-                <p class="col-span-1">ID</p>
-                <p class="col-span-1">Название</p>
-                <p class="col-span-2">Изображение</p>
-                <p class="col-span-1">Цена</p>
-                <div class="flex items-center gap-2 col-span-1 max-xl:flex-col">
-                    <button class="px-2 py-2 text-white bg-amber-500 rounded-md w-fit max-xl:w-full">Изменить</button>
-                    <button class="px-2 py-2 text-white bg-rose-500 rounded-md w-fit max-xl:w-full">Удалить</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 transition-all duration-500 overflow-hidden p-4" :class="isProductsShow ? 'h-full' : 'h-0'">
+            <div class="flex flex-col gap-2 text-lg rounded-xl border border-[#3BBAC2] p-4 shadow-[0px_0px_13px_-7px_black]" v-for="product in products">
+                <div class="flex items-center gap-4">
+                    <button @click="editProduct(product.id)" class="text-amber-500">
+                        <Icon class="text-3xl" name="material-symbols:edit-outline"/>
+                    </button>
+                    <button @click="deleteProduct(product.id)" class="text-red-500">
+                        <Icon class="text-3xl" name="ic:baseline-close"/>
+                    </button>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <p><span class="font-Comfortaa">Наименование товара:</span> <span class="font-bold">{{ product.title }}</span></p>
+                    <p><span class="font-Comfortaa">Цена:</span> <span class="font-bold">{{product.price.toLocaleString() }} ₽</span></p>
+                    <img :src="product.image" alt="" class="rounded-xl aspect-video object-cover">
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
     <div class="flex flex-col gap-6">
         <button @click="isOrdersShow = !isOrdersShow" class="flex items-center gap-2 text-xl md:text-2xl xl:text-3xl font-Comfortaa font-normal w-fit">
@@ -122,9 +129,6 @@
             console.log(data[0])
             messageTitle.value = 'Заказ отменён!', messageType.value = true 
             setTimeout(() => {
-                messageTitle.value = null
-            }, 3000) 
-            setTimeout(() => {
                 router.go()
                 messageTitle.value = null
             }, 1500) 
@@ -148,9 +152,6 @@
             console.log(data[0])
             messageTitle.value = 'Заказ выполнен!', messageType.value = true 
             setTimeout(() => {
-                messageTitle.value = null
-            }, 3000) 
-            setTimeout(() => {
                 router.go()
                 messageTitle.value = null
             }, 1500) 
@@ -160,5 +161,67 @@
                 messageTitle.value = null
             }, 3000) 
         }
+    }
+
+
+    /* список товаров */ 
+    const { data: products } = await supabase
+    .from('products')
+    .select(`*`)
+
+
+    /* добавление фото */
+    const formImages = []   
+    const inputImage = ref()
+    const imageToBase = (el) => {
+        const files = el.target.files
+        console.log(files)
+        for (let i = 0; i < files.length; i++) {                   
+            let reader = new FileReader()
+            reader.onloadend = () => {
+                formImages.push(reader.result)
+            }
+            reader.readAsDataURL(files[i])
+        }
+    }
+
+
+    /* добавление товара */    
+    const productForm = ref({
+        title: "",
+        price: "",
+        type: "",
+        brand: "",
+        color: "",
+        age: ""
+    })
+    const addProduct = async () => {        
+        const { data, error } = await supabase
+        .from('products')
+        .insert([
+            { image: `${formImages[0]}`, image2: `${formImages[1]}`, image3: `${formImages[2]}`, title: `${productForm.value.title}`, price: `${productForm.value.price}`, type: `${productForm.value.type}`, brand: `${productForm.value.brand}`, color: `${productForm.value.color}`, age: `${productForm.value.age}`, characteristic: '' },
+        ])
+        .select()
+          
+        messageTitle.value = 'Товар добавлен!', messageType.value = true 
+        setTimeout(() => {
+            router.go()
+            messageTitle.value = null
+        }, 1500) 
+    }
+
+
+    /* удаление товара */
+    const deleteProduct = async (productId) => {        
+        const { error } = await supabase
+        .from('products')
+        .delete()
+        .eq('id', `${productId}`)          
+          
+        messageTitle.value = 'Товар удалён!', messageType.value = true 
+        setTimeout(() => {
+            router.go()
+            messageTitle.value = null
+        }, 1500) 
     }
 </script>
