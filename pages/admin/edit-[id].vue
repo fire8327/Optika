@@ -60,7 +60,7 @@
 
 
     /* добавление фото */
-    const formImages = []   
+    let formImages = []   
     if(products[0].image) {
         formImages[0] = products[0].image 
     } 
