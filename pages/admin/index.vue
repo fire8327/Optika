@@ -188,7 +188,6 @@
 
 
     /* добавление фото */
-    const formImages = []   
     let files = []
     const imageToBase = (el) => {
         files = el.target.files
