@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-col gap-6">
+        <NuxtLink to="/admin" class="text-2xl text-[#3BBAC2] font-Comfortaa font-normal"><- Админ панель</NuxtLink>
         <div class="flex items-center gap-2 text-xl md:text-2xl xl:text-3xl font-Comfortaa font-normal">
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
             <p>Редактирование товара</p>
@@ -64,11 +65,11 @@
     if(products[0].image) {
         formImages[0] = products[0].image 
     } 
-    if(products[0].image1) {
-        formImages[1] = products[0].image1 
-    }
     if(products[0].image2) {
-        formImages[2] = products[0].image2 
+        formImages[1] = products[0].image2 
+    }
+    if(products[0].image3) {
+        formImages[2] = products[0].image3 
     } 
 
     const imageToBase = (el) => {
