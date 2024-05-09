@@ -39,13 +39,13 @@
                 <p class="text-lg">Товар: <span class="text-emerald-700">в наличии</span></p>
             </div>
         </div>
-        <div class="flex flex-col bg-white rounded-md p-4 gap-8 col-span-1">
+        <div class="flex flex-col bg-white rounded-md p-4 gap-8 col-span-1" v-if="data[0].characteristic">
             <p class="text-2xl">Характеристики</p>
             <div class="flex flex-col gap-4">
-                <div class="flex flex-col gap-2 text-base" v-for="d in 5">
+                <div class="flex flex-col gap-2 text-base" v-for="characteristic in data[0].characteristic">
                     <div class="flex items-center justify-between gap-2">
-                        <p class="opacity-60">Материал оправы:</p>
-                        <p>Пластик-металл</p>
+                        <p class="opacity-60">{{ characteristic.title }}</p>
+                        <p>{{ characteristic.value }}</p>
                     </div>
                     <div class="h-px w-full border-b border-black/70 border-dashed"></div>    
                 </div>

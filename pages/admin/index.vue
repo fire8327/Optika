@@ -18,9 +18,9 @@
                         <button @click="deleteCharacteristic(characteristics.indexOf(characteristic))" type="button" class="px-4 py-2 rounded-xl text-white bg-[#3BBAC2] w-fit self-end">
                             <Icon class="text-2xl" name="material-symbols:delete-forever"/>
                         </button>
-                        <div class="flex items-center max-md:flex-col gap-2">
-                            <FormKit v-model="characteristic.title" validation="required" outer-class="$remove:mb-4 w-full md:w-1/2" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" :name="`Наименование${characteristicCount}`" placeholder="Наименование характеристики" type="text"/>                    
-                            <FormKit v-model="characteristic.value" validation="required" outer-class="$remove:mb-4 w-full md:w-1/2" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" :name="`Значение${characteristicCount}`" placeholder="Значение характеристики" type="text"/>                    
+                        <div class="flex items-start max-md:flex-col gap-2">
+                            <FormKit v-model="characteristic.title" validation="required" outer-class="$remove:mb-4 w-full md:w-1/2" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" :name="`Наименование${characteristics.indexOf(characteristic)}`" placeholder="Наименование характеристики" type="text"/>                    
+                            <FormKit v-model="characteristic.value" validation="required" outer-class="$remove:mb-4 w-full md:w-1/2" inner-class="$remove:mb-1 $remove:max-w-md $remove:ring-1 $remove:ring-gray-400 w-full $remove:focus-within:ring-2" message-class="text-[#E71616]" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" :name="`Значение${characteristics.indexOf(characteristic)}`" placeholder="Значение характеристики" type="text"/>                    
                         </div>
                     </div>
                 </div>
@@ -41,9 +41,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 transition-all duration-500 overflow-hidden p-4" :class="isProductsShow ? 'h-full' : 'h-0'">
             <div class="flex flex-col gap-2 text-lg rounded-xl border border-[#3BBAC2] p-4 shadow-[0px_0px_13px_-7px_black]" v-for="product in products">
                 <div class="flex items-center gap-4">
-                    <button @click="editProduct(product.id)" class="text-amber-500">
+                    <NuxtLink :to="`/admin/edit-${product.id}`" class="text-amber-500">
                         <Icon class="text-3xl" name="material-symbols:edit-outline"/>
-                    </button>
+                    </NuxtLink>
                     <button @click="deleteProduct(product.id)" class="text-red-500">
                         <Icon class="text-3xl" name="ic:baseline-close"/>
                     </button>
@@ -51,7 +51,9 @@
                 <div class="flex flex-col gap-4">
                     <p><span class="font-Comfortaa">Наименование товара:</span> <span class="font-bold">{{ product.title }}</span></p>
                     <p><span class="font-Comfortaa">Цена:</span> <span class="font-bold">{{product.price.toLocaleString() }} ₽</span></p>
-                    <img :src="product.image" alt="" class="rounded-xl aspect-video object-cover">
+                    <NuxtLink :to="`/catalog/product-${product.id}`" class="trnasition-all duration-500 hover:scale-105">
+                        <img :src="product.image" alt="" class="rounded-xl aspect-video object-cover">
+                    </NuxtLink>
                 </div>
             </div>
         </div>
@@ -209,14 +211,11 @@
         }
     ]) 
 
-    const characteristicCount = ref(1)
-
     const addCharacteristic = () => {
         characteristics.value.push({
             title: "",
             value: ""
         })
-        characteristicCount.value++
     }
 
     const deleteCharacteristic = (id) => {
@@ -235,6 +234,7 @@
         color: "",
         age: ""
     })
+    
     const addProduct = async () => {        
         const { data, error } = await supabase
         .from('products')
