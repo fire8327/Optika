@@ -60,6 +60,13 @@
 <script setup>
     /* открытие меню */
     const isMenuShow = ref(false)
+
+
+    /* закрытие мобильного меню */
+    const nuxtApp = useNuxtApp()
+    nuxtApp.hook('page:start', () => {
+        isMenuShow.value = false
+    })
     
 
     /* проверка входа и выход */

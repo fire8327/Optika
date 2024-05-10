@@ -38,7 +38,7 @@
             <span>Список товаров</span>
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
         </button>
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 transition-all duration-500 overflow-hidden p-4" :class="isProductsShow ? 'h-full' : 'h-0'">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 transition-all duration-500 overflow-hidden max-lg:py-4 lg:p-4" :class="isProductsShow ? 'h-full' : 'h-0'">
             <div class="flex flex-col gap-2 text-lg rounded-xl border border-[#3BBAC2] p-4 shadow-[0px_0px_13px_-7px_black]" v-for="product in products">
                 <div class="flex items-center gap-4">
                     <NuxtLink :to="`/admin/edit-${product.id}`" class="text-amber-500">
@@ -64,7 +64,7 @@
             <span>Заказы</span>
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
         </button>
-        <div class="flex flex-col gap-8 text-lg rounded-xl relative lg:w-1/2 transition-all duration-500 overflow-hidden" :class="isOrdersShow ? 'h-full border border-[#3BBAC2] p-4' : 'h-0'" v-for="order in ordersArray">
+        <div class="flex flex-col gap-8 text-lg rounded-xl relative lg:w-1/2 transition-all duration-500 overflow-hidden max-lg:pt-10" :class="isOrdersShow ? 'h-full border border-[#3BBAC2] p-4' : 'h-0'" v-for="order in ordersArray">
             <div class="flex flex-col gap-4">
                 <p><span class="font-Comfortaa">Заказчик:</span> <span class="font-bold">{{ order[0].users.surname }} {{ order[0].users.name }}</span></p>
                 <p><span class="font-Comfortaa">ID заказчика:</span> <span class="font-bold">{{ order[0].users.id }}</span></p>
