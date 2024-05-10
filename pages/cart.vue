@@ -94,7 +94,7 @@
         if (promoCodes.includes(detailsForm.value.code)) {
             const discontPercent = disconts[promoCodes.indexOf(detailsForm.value.code)]
             detailsForm.value.codeType = true
-            detailsForm.value.codeTitle = 'Промокод активирован 😀'
+            detailsForm.value.codeTitle = `Промокод активирован (-${discontPercent}%) 😀`
             total.value = Math.round(sum - sum * (discontPercent/100))
         } else {
             detailsForm.value.codeType = false
