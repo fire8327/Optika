@@ -1,6 +1,9 @@
 <template>
     <div class="flex flex-col gap-6">
-        <NuxtLink to="/admin" class="text-2xl text-[#3BBAC2] font-Comfortaa font-normal"><- Админ панель</NuxtLink>
+        <NuxtLink to="/admin" class="text-2xl text-[#3BBAC2] font-Comfortaa font-normal flex items-center gap-4">
+            <Icon name="tabler:arrow-back"/>
+            <span>Админ панель</span>
+        </NuxtLink>
         <div class="flex items-center gap-2 text-xl md:text-2xl xl:text-3xl font-Comfortaa font-normal">
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
             <p>Редактирование товара</p>
@@ -28,7 +31,6 @@
                 <button @click="addCharacteristic" type="button" class="px-4 py-2 rounded-xl text-white bg-[#3BBAC2] mx-auto">
                     <Icon class="text-2xl" name="material-symbols:exposure-plus-1"/>
                 </button>
-                <FormKit @change="imageToBase" multiple="true" accept=".png,.jpg,.jpeg,.svg,.webp,.bmp" type="file" name="Фото" messages-class="text-[#E9556D] font-Comfortaa text-base mt-2" outer-class="w-full" inner-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full bg-white"/>      
                 <FormKit type="submit" input-class="bg-[#3BBAC2] rounded-full font-semibold text-white text-center max-md:px-6 py-2 hover:opacity-80 transition-all duration-300 $remove:focus-visible:outline-blue-600 $remove:focus-visible:outline-offset-2 $remove:bg-blue-600 $remove:focus-visible:outline-2 $remove:inline-flex $remove:text-sm">Обновить</FormKit>
             </div>
         </FormKit>
@@ -58,31 +60,6 @@
     .from('products')
     .select(`*`)
     .eq('id', `${route.params.id}`)
-
-
-    /* добавление фото */
-    let formImages = []   
-    if(products[0].image) {
-        formImages[0] = products[0].image 
-    } 
-    if(products[0].image2) {
-        formImages[1] = products[0].image2 
-    }
-    if(products[0].image3) {
-        formImages[2] = products[0].image3 
-    } 
-
-    const imageToBase = (el) => {
-        const files = el.target.files
-        console.log(files)
-        for (let i = 0; i < files.length; i++) {                   
-            let reader = new FileReader()
-            reader.onloadend = () => {
-                formImages.push(reader.result)
-            }
-            reader.readAsDataURL(files[i])
-        }
-    }
 
 
     /* управление характеристиками */
@@ -124,7 +101,7 @@
         const { data, error } = await supabase
         .from('products')
         .update([
-            { image: `${formImages[0]}`, image2: `${formImages[1]}`, image3: `${formImages[2]}`, title: `${productForm.value.title}`, price: `${productForm.value.price}`, type: `${productForm.value.type}`, brand: `${productForm.value.brand}`, color: `${productForm.value.color}`, age: `${productForm.value.age}`, characteristic: characteristics.value },
+            { title: `${productForm.value.title}`, price: `${productForm.value.price}`, type: `${productForm.value.type}`, brand: `${productForm.value.brand}`, color: `${productForm.value.color}`, age: `${productForm.value.age}`, characteristic: characteristics.value },
         ])
         .eq('id',`${route.params.id}`)
         .select()

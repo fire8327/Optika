@@ -21,7 +21,6 @@
                 <input @input="checkCode" class="px-4 py-2 rounded-md border border-[#3BBAC2]" v-model="detailsForm.code" placeholder="Укажите промокод" type="text">
                 <p class="text-base" :class="detailsForm.codeType ? 'text-emerald-800' : 'text-[#E71616]'" v-if="detailsForm.codeTitle">{{ detailsForm.codeTitle }}</p>
             </div>
-            {{ detailsForm }}
             <div class="flex items-center justify-between gap-2">
                 <p class="">Итого:</p>
                 <p class="text-[#3BBAC2] text-3xl">{{ total.toLocaleString() }} ₽</p>
@@ -152,7 +151,7 @@
             setTimeout(() => {
                 messageTitle.value = null
             }, 3000)
-            router.push("/")
+            router.push("/success")
         } else {
             messageTitle.value = 'Произошла ошибка!', messageType.value = false
             setTimeout(() => {
