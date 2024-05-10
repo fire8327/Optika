@@ -64,7 +64,7 @@
             <span>Заказы</span>
             <span class="w-8 h-0.5 bg-black rounded-full"></span>
         </button>
-        <div class="flex flex-col gap-8 text-lg rounded-xl relative lg:w-1/2 transition-all duration-500 overflow-hidden max-lg:pt-10" :class="isOrdersShow ? 'h-full border border-[#3BBAC2] p-4' : 'h-0'" v-for="order in ordersArray">
+        <div class="flex flex-col gap-8 text-lg rounded-xl relative lg:w-1/2 transition-all duration-500 overflow-hidden" :class="isOrdersShow ? 'h-full border border-[#3BBAC2] p-4 max-lg:pt-10' : 'h-0'" v-for="order in ordersArray">
             <div class="flex flex-col gap-4">
                 <p><span class="font-Comfortaa">Заказчик:</span> <span class="font-bold">{{ order[0].users.surname }} {{ order[0].users.name }}</span></p>
                 <p><span class="font-Comfortaa">ID заказчика:</span> <span class="font-bold">{{ order[0].users.id }}</span></p>
