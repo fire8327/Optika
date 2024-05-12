@@ -18,5 +18,10 @@ export default defineNuxtConfig({
         'PT Sans': true,
         'Comfortaa': true
     }
+  },
+  postcss: {
+    plugins: {
+      cssnano: false 
+    }
   }
 })
