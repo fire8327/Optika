@@ -28,28 +28,7 @@
                             </div>
                             <div class="flex items-center gap-2">
                                 <Icon class="text-2xl shrink-0 text-[#028ECE]/80" name="solar:wallet-money-outline"/>
-                                <p class="text-xl">199 ₽</p>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-                <div class="flex items-center justify-center bg-gradient-to-bl from-[#028ECE] to-gray-200 p-0.5 rounded-lg">
-                    <div class="flex flex-col gap-4 p-4 rounded-md grow bg-white">
-                        <p class="text-2xl font-Comfortaa font-normal">Экспресс доставка</p>
-                        <img src="/img/delivery/1.jpg" alt="" class="rounded-md">
-                        <p class="text-xl font-Comfortaa font-normal">Преимущества:</p>
-                        <div class="flex flex-col gap-2">
-                            <div class="flex items-center gap-2">
-                                <Icon class="text-2xl shrink-0 text-[#028ECE]/80" name="icon-park-outline:delivery"/>
-                                <p class="text-xl">Доставка курьером до двери</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <Icon class="text-2xl shrink-0 text-[#028ECE]/80" name="material-symbols:alarm-outline"/>
-                                <p class="text-xl">Срок доставки от 1 часа</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <Icon class="text-2xl shrink-0 text-[#028ECE]/80" name="solar:wallet-money-outline"/>
-                                <p class="text-xl">399 ₽</p>
+                                <p class="text-xl">300 ₽</p>
                             </div>
                         </div>
                     </div>    
@@ -63,27 +42,6 @@
                 <span class="w-8 h-0.5 bg-black rounded-full"></span>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 font-normal">
-                <div class="flex items-center justify-center bg-gradient-to-br from-[#028ECE] to-gray-200 p-0.5 rounded-lg">
-                    <div class="flex flex-col gap-4 p-4 rounded-md grow bg-white">
-                        <p class="text-2xl font-Comfortaa font-normal">В пункте выдачи</p>
-                        <img src="/img/delivery/2.jpg" alt="" class="rounded-md">
-                        <p class="text-xl font-Comfortaa font-normal">Преимущества:</p>
-                        <div class="flex flex-col gap-2">
-                            <div class="flex items-center gap-2">
-                                <Icon class="text-2xl shrink-0 text-[#028ECE]/80" name="icon-park-outline:delivery"/>
-                                <p class="text-xl">Доставка курьером до двери</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <Icon class="text-2xl shrink-0 text-[#028ECE]/80" name="material-symbols:alarm-outline"/>
-                                <p class="text-xl">Срок доставки от 1 до 3 дней</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <Icon class="text-2xl shrink-0 text-[#028ECE]/80" name="solar:wallet-money-outline"/>
-                                <p class="text-xl">99 ₽</p>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
                 <div class="flex items-center justify-center bg-gradient-to-bl from-[#028ECE] to-gray-200 p-0.5 rounded-lg">
                     <div class="flex flex-col gap-4 p-4 rounded-md grow bg-white">
                         <p class="text-2xl font-Comfortaa font-normal">В магазине</p>
