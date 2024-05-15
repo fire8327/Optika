@@ -12,7 +12,7 @@
             </div>
             <div class="flex items-center lg:items-start gap-4 max-lg:flex-col md:w-2/3 lg:w-1/2">
                 <FormKit type="text" v-model="user.email" validation="required" messages-class="text-[#E9556D] font-Comfortaa" name="Email" outer-class="w-full lg:w-1/2" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" placeholder="Email"/>
-                <FormKit type="text" v-model="user.password" validation="required|length:6" messages-class="text-[#E9556D] font-Comfortaa" name="Пароль" outer-class="w-full lg:w-1/2" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" placeholder="••••••"/>
+                <FormKit type="password" v-model="user.password" validation="required|length:6" messages-class="text-[#E9556D] font-Comfortaa" name="Пароль" outer-class="w-full lg:w-1/2" input-class="px-4 py-2 border border-[#3BBAC2] rounded-xl focus:outline-none w-full" placeholder="••••••"/>
             </div>            
             <button type="submit" class="px-4 py-2 bg-[#3BBAC2] text-white rounded-full w-[160px] text-center">Обновить данные</button>
         </FormKit>
