@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="flex flex-col gap-2">
-                <p class="text-2xl font-Comfortaa font-normal">Возраст</p>
+                <p class="text-2xl font-Comfortaa font-normal">Категория</p>
                 <select class="rounded-md border border-[#3BBAC2] px-4 py-2" name="age" v-model="filters.age">
                     <option :value="age" v-for="age in selectAge">{{ age }}</option>
                 </select>
