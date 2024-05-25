@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware((to) => {
         userStore.authenticated = true
     }
 
-    if (authenticated.value && to?.path === '/auth' && to?.path === '/reg') {
+    if (authenticated.value && (to?.path === '/auth' || to?.path === '/reg')) {
         return navigateTo('/')
     }
 
