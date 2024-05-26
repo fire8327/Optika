@@ -62,20 +62,11 @@
 
     
     /* модификация данных и поиск */
-    const { title } = storeToRefs(useSearchStore())
-    const products = ref() 
-    const filterData = ref()
-    const modifyData = () => {
-        products.value = data
-        filterData.value = products.value.filter(el => {
-            if(title.value && el.title.toLowerCase().indexOf(title.value.toLowerCase()) == -1) {
-                return false
-            }
-            return true
-        }) 
-        products.value = filterData.value
-    }
-    modifyData()
+    const store = useProductStore()    
+    const products = computed(() => store.filteredProducts)
+    onMounted(() => {
+        store.setProducts(data)
+    })
     
 
     /* управление select'ами и input'ами */
