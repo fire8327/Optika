@@ -70,24 +70,10 @@
     
 
     /* управление select'ами и input'ами */
-    const selectAge = ref(['Все'])
-    const selectType = ref(['Все'])
-    const inputBrand = ref([])
-    const inputColor = ref([])
-    products.value.forEach(el => {
-        if(selectAge.value.indexOf(el.age) === -1) {
-            selectAge.value.push(el.age)
-        }
-        if(selectType.value.indexOf(el.type) === -1) {
-            selectType.value.push(el.type)
-        }
-        if(inputBrand.value.indexOf(el.brand) === -1) {
-            inputBrand.value.push(el.brand)
-        }
-        if(inputColor.value.indexOf(el.color) === -1) {
-            inputColor.value.push(el.color)
-        }
-    })
+    const selectAge = ['Все', ...new Set(data.map(item => item.age))]
+    const selectType = ['Все', ...new Set(data.map(item => item.type))]
+    const inputBrand = [...new Set(data.map(item => item.brand))]
+    const inputColor = [...new Set(data.map(item => item.color))]
        
 
     /* создание фильтров */    
