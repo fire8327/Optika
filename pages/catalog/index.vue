@@ -55,25 +55,25 @@
 
     /* подключение к БД */
     const supabase = useSupabaseClient()
-    const { data, error } = await supabase
+    const { data: productsData, error } = await supabase
     .from('products')
     .select('*')
     .order('title', { ascending: true })   
 
     
     /* модификация данных и поиск */
-    const store = useProductStore()    
+    const store = useProductStore()
     const products = computed(() => store.filteredProducts)
     onMounted(() => {
-        store.setProducts(data)
+        store.setProducts(productsData)
     })
     
 
     /* управление select'ами и input'ами */
-    const selectAge = ['Все', ...new Set(data.map(item => item.age))]
-    const selectType = ['Все', ...new Set(data.map(item => item.type))]
-    const inputBrand = [...new Set(data.map(item => item.brand))]
-    const inputColor = [...new Set(data.map(item => item.color))]
+    const selectAge = ['Все', ...new Set(productsData.map(item => item.age))]
+    const selectType = ['Все', ...new Set(productsData.map(item => item.type))]
+    const inputBrand = [...new Set(productsData.map(item => item.brand))]
+    const inputColor = [...new Set(productsData.map(item => item.color))]
        
 
     /* создание фильтров */    
@@ -89,39 +89,28 @@
 
     /* фильтрация */    
     const filterProducts = () => {
-        products.value = filterData.value
-        const filter = products.value.filter(el => {
-            if (el.price < filters.value.minPrice && filters.value.minPrice) {
-                return false
-            }
-            if (el.price > filters.value.maxPrice && filters.value.maxPrice) {
-                return false
-            }
-            if (el.type != filters.value.type && filters.value.type != 'Все') {
-                return false
-            }
-            if (el.age != filters.value.age && filters.value.age != 'Все') {
-                return false
-            }
-            if(filters.value.colors.indexOf(el.color) == -1 && filters.value.colors.length>0) {
-                return false
-            }
-            if(filters.value.brands.indexOf(el.brand) == -1 && filters.value.brands.length>0) {
-                return false
-            }
+        const filtered = productsData.filter(el => {
+            if (filters.value.minPrice && el.price < filters.value.minPrice) return false
+            if (filters.value.maxPrice && el.price > filters.value.maxPrice) return false
+            if (filters.value.type !== 'Все' && el.type !== filters.value.type) return false
+            if (filters.value.age !== 'Все' && el.age !== filters.value.age) return false
+            if (filters.value.brands.length && !filters.value.brands.includes(el.brand)) return false
+            if (filters.value.colors.length && !filters.value.colors.includes(el.color)) return false
             return true
-        })     
-        products.value = filter
-    }    
+        })
+        store.setProducts(filtered)
+    }  
     
     const cancelFilters = () => {
-        products.value = filterData.value
-        filters.value.minPrice = ""
-        filters.value.maxPrice = ""
-        filters.value.age = "Все"
-        filters.value.type = "Все"
-        filters.value.brands = []
-        filters.value.colors = []
+        filters.value = {
+            minPrice: "",
+            maxPrice: "",
+            age: 'Все',
+            type: 'Все',
+            brands: [],
+            colors: []
+        }
+        store.setProducts(productsData)
     }
 
     /* добавление в БД */
